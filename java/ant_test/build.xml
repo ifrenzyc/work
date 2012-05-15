@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project default="usage" basedir=".">
+    <property name="project.name" value="HelloWorld" />
+    <property name="project.jar" value="HelloWorld.jar" />
+    <property name="src" value="src" />
+    <property name="dest" value="classes" />
+
+    <target name="init">
+        <mkdir dir="${dest}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src}" destdir="${dest}" />
+    </target>
+
+    <target name="build" depends="compile">
+        <jar jarfile="${project.jar}" basedir="${dest}" />
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="com.yangc.ant.HelloWorld" classpath="${dest}" />
+    </target>
+
+    <target name="run-jar" depends="build">
+        <java classname="com.yangc.ant.HelloWorld" classpath="${project.jar}" />
+    </target>
+
+    <target name="usage">
+        <echo message="${project.name}项目编译命令说明" />
+        <echo message="" />
+        <echo message="+ compile      编译项目工程代码" />
+        <echo message="+ build        将工程代码打成jar包" />
+        <echo message="" />
+        <echo message="+ run          运行项目工程代码" />
+        <echo message="+ run-jar      运行打包的项目代码" />
+    </target>
+</project>

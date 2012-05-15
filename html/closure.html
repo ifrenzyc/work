@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test hotkey</title>
+	<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="jquery.hotkeys.js"></script>
+<script type="text/javascript">
+$(function() {
+	var activePreKeys = debugTools();
+	$(document).bind('keydown', 'Alt+Shift+q', function() {
+		activePreKeys();
+	});
+
+	$(document).bind('keydown', 'i', function() {
+		if (isActive())
+		{
+			$('#debug_tools').toggle();
+			freezePreKeys();
+		}
+	});
+});
+
+
+function debugTools()
+{
+	var flag = false;
+	function activePreKeys()
+	{
+		flag = true;
+	}
+
+	isActive = function()
+	{
+		return flag;
+	}
+
+	freezePreKeys = function()
+	{
+		flag = false;
+	}
+
+	return activePreKeys;
+}
+</script>
+</head>
+
+<body>
+<div id="debug_tools" style="display:none;">	
+	<a href="http://www.google.com">Google</a>
+</div>
+</body>
+</html>
